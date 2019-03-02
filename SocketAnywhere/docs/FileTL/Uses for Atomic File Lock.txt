@@ -1,0 +1,15 @@
+Uses for a file-based lock:
+
+"The behavior of the file lock is platform-dependent. On some platforms, the file lock is advisory, which means that unless an application checks for a file lock, it will not be prevented from accessing the file. On other platforms, the file lock is mandatory, which means that a file lock prevents any application from accessing the file. "
+[http://www.exampledepot.com/egs/java.nio/SetFileLock.html]
+
+The efficacy of a filelock based locking scheme is therefore not consistent across platforms.
+
+Systems that do not support locking, including:
+- FTP
+- Amazon S3
+- Simple file systems
+
+
+
+

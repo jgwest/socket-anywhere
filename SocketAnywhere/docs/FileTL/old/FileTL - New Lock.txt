@@ -1,0 +1,46 @@
+Handshaking is to select a single individual to create the uuid in the directory.
+
+Algorithm:
+- Scan the directory for the lock dir
+  o Exists - UUID: As before
+  o Else: Intiate handshaking
+
+Handshaking:
+- Scan the lock dir for a uuid.
+	o If found, exit handshaking
+- List all locks in lock_dir/handshaking
+- If empty, mkdir filetl-lock[jgwlock]-locknum[0]
+	o If success on mkdir, update the lock directory uuid
+- Else, list and find the lock with the highest number
+- Test it
+- On timeout, mkdir locknum++
+- On response, wait 1 second and loop to top
+- if fail, loop to the top.
+
+
+
+Test It:
+- Scan the lock directory for a uuid. If found, return.
+- Otherwise, scan the handshaking directory for the highest number handshaking lock available
+- If no handshaking lock exists, attempt to acquire the lock
+
+- If handshaking lock exists, ....
+
+
+Handshaking Test:
+filetl-test-handshake-lock[jgwlock]-locknum[0]-testuuid[...uuid test...]
+
+filetl-test-handshake-active-lock[jgwlock]-locknum[0]-testuuid[...uuid test...]
+
+
+
+
+
+filetl-lock[jgwlock]-locknum[0]
+
+
+filetl-lock[jgwlock]
+
+filetl-lock[jgwlock]/filetl-lock[jgwlock]-lockuuid[f1426d35-00ea-4e59-aa26-2a0842b72aa3]
+
+

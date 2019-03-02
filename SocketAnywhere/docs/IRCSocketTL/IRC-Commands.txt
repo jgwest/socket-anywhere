@@ -1,0 +1,76 @@
+
+
+- We have no associations between nick names and uuids. So no need to register yourself when you join
+
+- At the moment I'm assuming that all nodes share all IRC rooms
+- One channel per server
+
+- At the moment I'm assuming all commands will have a *-response command as the only reply, in order to prevent context collisions.
+
+TODO: How to announce that you are listening
+
+src-uuid()
+my-uuid()
+
+
+!listen-request address() port() my-uuid()
+!listen-request-response conflict(true/false) address() port() src-uuid() my-uuid()
+
+
+Sent on Connect:
+!shortened-uuid-announce uuid() shortened-id(1a9s) my-uuid() ctxt()
+!shortened-uuid-announce-response uuid() conflict(true) src-uuid() my-uuid() shortened-id() ctxt()
+!shortened-uuid-listen uuid() shortened-id() my-uuid() ctxt()
+
+Sent by other parties, in other thread:
+!get-shortened-uuid uuid() my-uuid() ctxt()
+!get-shortened-uuid-response shortened-id() my-uuid() src-uuid() ctxt()
+(if not available, shortened-id is 'n/a')
+
+
+
+
+!listen-announce address() port() my-uuid()
+
+!stop-listening address() port() my-uuid()
+
+
+!register-uuid uuid()
+!unregister-uuid uuid() 
+
+/** Query a particular IRC user for which uuid they represent */
+!query-nick name()  src-uuid() ctxt()
+!query-nick-response uuid() src-uuid() my-uuid() ctxt()
+
+/** Query a UUID for what they are listening on */
+!query-listening uuid() src-uuid() ctxt()
+!query-listening-response address() port() src-uuid() my-uuid() ctxt()
+!query-listening-end-response src-uuid() my-uuid() ctxt()
+
+/*** Query a socket address for which UUID is listening on it */
+!query-address address() port() my-uuid() ctxt()
+!query-address-response uuid() my-uuid() src-uuid() ctxt()
+
+!connect address() port() uuid() my-uuid() ctxt()
+!connect-response conn-id() result(success/fail) my-uuid() src-uuid() ctxt()
+
+!packet (recv/sender)-conn-id()  target-uuid() ctxt() data()
+!p (r/s)id() tid() s() d()
+
+removed: my-uuid() / myid()
+
+(we don't need myid() technically, the remote node already knows this from the connection id. and for target uuid, we could register a shortcut)
+
+!close-socket (recv/sender)-conn-id() my-uuid() target-uuid() ctxt()
+
+
+!request-shortened-uuid uuid() my-uuid() ctxt()
+!request-shortened-uuid-response shortened-uuid(1) src-uuid() my-uuid() ctxt()
+
+(or i could just include a shortened uuid in connection response)
+
+also, i don't think shortening uuids will work
+
+
+
+ <UUID> 

@@ -1,0 +1,8 @@
+
+FileTL Requirements:
+The system should allow for multiple separate processes both serving and connecting in the same directory.
+The system should not contain any race conditions.
+There cannot be a build up of files on the system due to detritus left over from processes not cleanly shutting down.
+The number of leftover files when all communication is complete should be 0 or nearly 0.
+
+

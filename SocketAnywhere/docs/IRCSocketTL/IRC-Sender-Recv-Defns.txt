@@ -1,0 +1,52 @@
+
+Need stricter definitions of sender and receiver:
+
+
+Node which originated the connection:
+	sc.setAreWeConnOriginator(true);
+	sc.setRemoteConnectionID(crl.getConnectionID());
+
+Node receiving the connection:
+	c.setAreWeConnOriginator(false)
+	c.setOurConnectionID(_nextConnectionId);
+
+
+Thus, for every socket, one node will see itself as the originator, and one will not.
+
+
+
+Logic:
+
+if(ic.areWeConnOriginator()) {
+			
+			// If we originated, we are not the server, so it is the receiver's conn id
+			if(isShortForm) sb.append("rid"); 
+			else sb.append("recv-conn-id");
+
+else {
+			// If we did not originate, we are the server, so it is our id
+			if(isShortForm) sb.append("sid"); 
+			else sb.append("sender-conn-id");
+			sb.append("("+ic.getOurConnectionID()+") ");
+}
+
+
+recv == are Conn Originator
+sender == are Not Connection Originator
+
+recv = we received the id, because we are the connection originator (and the id determined by the serversocket)
+
+sender = we sent the id, because someone connected to our server socket (and the id is determined by the serversocket)
+
+-------------------------
+
+When sending data:
+- recv refers to the person that is being sent the data
+- sender refers to the person that is sending the data
+
+A wants to send data to B. That makes A the sender, and B the receiver.
+
+So when A (the sender) wants to send data to B (the receiver), it checks the connection it wants to send data on.
+
+It checks that connection for whose ID that connection uses. If if it uses the sender's ID (because the sender was originally the serversocket) then say sender, otherwise use the receiver's ID (because the sender originated the connection originally).
+

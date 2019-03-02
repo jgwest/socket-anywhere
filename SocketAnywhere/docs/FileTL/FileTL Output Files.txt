@@ -1,0 +1,72 @@
+
+
+
+BoundConnectionManager:
+
+ * When a bound connection is active, the following file should exist in the directory
+ * - filetl-listening-on-[(bound connection name)]-bounduuid[(bound connection's uuid]
+ * 
+ * Test whether a bound connection is active:
+ * - filetl-test-listen-on-connection[(bound connection)]-bounduuid[(uuid of bound connection)]-testuuid[(random uuid of the tester)]
+ * - Response, if active: filetl-test-listen-active-connection[(bound connection)]-bounduuid[(uuid if bound connection)]-testuuid[(random uuid of the tester)]
+ *
+ * A bound connection is closed by appending -closed to its filename.
+
+
+
+
+
+FileServerSocketImpl:
+
+ * Waits for:
+ *  - filetl-establish-source[listenName]-to-dest[remoteName]-esuuid[uuid]-connuuid[uuid]-ready (sent by FileSocketImpl)
+ *  
+ *  Responds with:
+ *   - filetl-establish-response-dest[myListenName]-from-source[srcEntry]-esuuid[establishUUID]-connuuid[uuid]
+
+
+
+
+
+FileSocketImpl:
+
+ * Sends:
+ *  - filetl-establish-source[listenName]-to-dest[remoteName]-esuuid[uuid]-connuuid[uuid]-ready (sent by FileSocketImpl)
+ *
+ * Then waits for:
+ *  - filetl-establish-response-dest[myListenName]-from-source[srcEntry]-esuuid[establishUUID]-connuuid[uuid]
+ *
+
+ * To close, it sends:
+ *  - filetl-packet-source[listenName]-to-dest[remoteName]-connuuid[uuid]-close
+
+
+
+
+FileTLInputStream:
+
+ * Listens for
+ *  - filetl-packet-source[_remoteName]-to-dest[listenName]-packetid[_nextFileNum]-connuuid[connuuid]
+
+
+FileTLOutputStream:
+
+ * Writes:
+ * -filetl-packet-source[_sourceName]-to-dest[_remoteName]-packetid[_nextFileNum]-connuuid[connuuid]
+
+
+
+Lock:
+ * Active Lock:
+ * - filetl-lock[lockName]-lockuuid[FileTLUtil.generateUUID()]
+ * 
+ * Attempting to acquire a new (non-existent) lock:
+ * - filetl-attempt-acquire-lock[lockName]-acquireuuid[acquireUUID]
+ * 
+ * Testing an existing active to see if it is still active:
+ * - filetl-test-lock[lockName]-lockuuid[lockUUID]-testuuid[uuidComponent]
+ * 
+ * The response from an active lock, indicating that it is in fact still active
+ * - filetl-test-lock-response-active-lock[lockName]-lockuuid[lockUUID]-testuuid[uuidComponent]
+
+

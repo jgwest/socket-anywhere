@@ -1,0 +1,21 @@
+
+
+Join:
+
+[20:08:22.469]  [NB] [OUT2]   [new] {Cf6883, 1}        State CONN_DEAD to CONNECTOR_JOIN_SENT_WAITING_FOR_ACK                                                                                     
+[20:08:22.469]  [NB] [OUT2]   [new] {Cf6883, 1}     -> CmdJoinConn nodeUUID:93f4418b-6643-4835-982b-9260351f6883  connectionID:1                                                                  
+[20:08:22.470]  [NB] [OUT2]   [new]                    CmdJoinConn nodeUUID:93f4418b-6643-4835-982b-9260351f6883  connectionID:1                                                   ->  {Sf6883, 1}
+[20:08:22.470]  [NB] [OUT2]   [new]                    State CONN_ESTABLISHED to CONNECTEE_JOIN_RECEIVED_ACK1_SENT_WAITING_FOR_ACK2                                                    {Sf6883, 1}
+[20:08:22.471]  [NB] [OUT2]   [new]                    CmdAckJoinConn - intParam:1  nodeUUID:93f4418b-6643-4835-982b-9260351f6883  connectionID:1 cmd-id: 96                       <-  {Sf6883, 1}
+[20:08:22.471]  [NB] [OUT2]   [new] {Cf6883, 1}     <- CmdAckJoinConn - intParam:1  nodeUUID:93f4418b-6643-4835-982b-9260351f6883  connectionID:1 cmd-id: 97                                      
+[20:08:22.471]  [NB] [OUT2]   [new] {Cf6883, 1}        State CONNECTOR_JOIN_SENT_WAITING_FOR_ACK to CONN_ESTABLISHED                                                                              
+[20:08:22.471]  [NB] [OUT2]   [new] {Cf6883, 1}     -> CmdAckJoinConn - intParam:2  nodeUUID:93f4418b-6643-4835-982b-9260351f6883  connectionID:1 cmd-id: 98                                      
+[20:08:22.472]  [NB] [OUT2]   [new]                    CmdAckJoinConn - intParam:2  nodeUUID:93f4418b-6643-4835-982b-9260351f6883  connectionID:1 cmd-id: 99                       ->  {Sf6883, 1}
+[20:08:22.472]  [NB] [OUT2]   [new]                    State CONNECTEE_JOIN_RECEIVED_ACK1_SENT_WAITING_FOR_ACK2 to CONN_ESTABLISHED                                                    {Sf6883, 1}
+[20:08:22.472]  [NB] [OUT2]   [new]                    CmdDataRequestOnReconnect - firstPacketToResend: 0                                                                          <-  {Sf6883, 1}
+[20:08:22.472]  [NB] [OUT2]   [new] {Cf6883, 1}     <- CmdDataRequestOnReconnect - firstPacketToResend: 0                                                                                         
+[20:08:22.473]  [NB] [OUT2]   [new] {Cf6883, 1}     -> CmdAckDataRequestOnReconnect - intParam:0  nodeUUID:93f4418b-6643-4835-982b-9260351f6883  connectionID:1 cmd-id: 102                       
+[20:08:22.473]  [NB] [OUT2]   [new]                    CmdAckDataRequestOnReconnect - intParam:0  nodeUUID:93f4418b-6643-4835-982b-9260351f6883  connectionID:1 cmd-id: 103        ->  {Sf6883, 1}
+
+
+

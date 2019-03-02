@@ -1,0 +1,26 @@
+
+Two close event types:
+
+
+1. Local user calls close():
+
+Three places one can call close():
+- On the Inputstream
+- On the Outputstream
+- On the Socket itslef
+
+Inputstream and outputstream close() methods call close() on socket
+The socket may then inform them back.
+
+
+
+
+2. Remote user calls close:
+
+- Detected in WatchingForCloseThread, which cals FileSocketImpl.informRemoteClose()
+- FileSocketImpl.informRemoteClose() will then inform the outputstream and inputstream
+- output stream should close immediately
+- input stream should close when it runs out of data to read 
+
+
+Input stream will clean up the data it would read, 30 seconds after a close.

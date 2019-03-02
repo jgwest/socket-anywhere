@@ -1,0 +1,40 @@
+
+once a person quits, or leaves the channel, they are considered to have stopped listening.
+
+listening - address[address listening on] port[port listening on]
+stop listening
+
+establish connection - destination address[address] port[port] uuid[auto gen uuid]
+connectedion accepted - respuuid [original uuid]
+
+data - source-addr[] source-port[] dest-addr[] dest-port[] data[]
+
+
+
+events:
+on join
+- channel
+- nickname
+- host address
+
+on leave
+- channel
+- nickname
+- host address
+
+on quit
+- nickname
+- quit message
+- host address
+
+on say
+- nickname
+- channel
+- host address
+- thing being said
+
+IJoinLeaveListener
+
+IQuitListener
+
+IChannelSayListener

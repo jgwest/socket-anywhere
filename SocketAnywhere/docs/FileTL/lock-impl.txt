@@ -1,0 +1,31 @@
+
+
+The current file lock impl uses no atomic operations. It merely relies on staking
+claim to a lock, and waiting for anyone else to contend for it.
+
+This method is slow, but requires no support for any atomic operations from the filesystem.
+
+Algorithm:
+
+- Scan the lock directory, looking for an existing active lock, or someone else trying 
+  to acquire a new lock.
+
+- If existing active lock: 
+  o Test the active lock, by writing a test file, and waiting for a response
+  o If response found, wait, and try again from start of algorithm
+  o If response not found, the lock is dead, so delete it and return to trying to claim it below
+  
+- If no existing active lock:
+  o Write acquire-lock-name[]-uuid[]
+  o List for 5 seconds to see if any one else attempts to acquire, or anyone else
+    establishes an active lock.
+
+    o If during that 5 seconds an active lock is established, then return to the start of the algorithm
+    o If during that 5 seconds someone attempts to acquire an active lock:
+      - Then the attempt active lock with a LOWER UUID will continue to acquire, and the
+        attempt active lock with a HIGHER UUID will fail, stop trying to acquire, and wait to try acquiring again
+     
+    o If after 5 seconds, our attempt acquire lock has not been stopped, the lock is ours
+      - Write a file indicating the lock has been acquired.
+      
+        
