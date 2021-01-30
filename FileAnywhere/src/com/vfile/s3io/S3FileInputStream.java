@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.jets3t.service.S3ServiceException;
+import org.jets3t.service.ServiceException;
 
 import com.vfile.interfaces.IFileInputStream;
 
@@ -44,6 +45,9 @@ public class S3FileInputStream extends InputStream implements IFileInputStream {
 				_inner = _file.getS3ObjectFull().getDataInputStream();
 
 			} catch (S3ServiceException e) {
+				S3Log.err("S3ServiceException in openInnerIfNeeded(...) "+e);
+				throw new IOException("Unable to open file"+e);
+			} catch (ServiceException e) {
 				S3Log.err("S3ServiceException in openInnerIfNeeded(...) "+e);
 				throw new IOException("Unable to open file"+e);
 			}

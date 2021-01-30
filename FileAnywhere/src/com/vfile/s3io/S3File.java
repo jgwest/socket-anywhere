@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.jets3t.service.S3Service;
 import org.jets3t.service.S3ServiceException;
+import org.jets3t.service.ServiceException;
 import org.jets3t.service.model.S3Object;
 
 import com.vfile.interfaces.IFile;
@@ -514,6 +515,9 @@ public class S3File implements IFile {
 			else return false;
 			
 		} catch (S3ServiceException e) {
+			S3Log.err("Exception thrown in renameTo() "+e);
+			return false;
+		} catch (ServiceException e) {
 			S3Log.err("Exception thrown in renameTo() "+e);
 			return false;
 		}
