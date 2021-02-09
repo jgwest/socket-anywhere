@@ -67,9 +67,12 @@ public abstract class CmdMultiplexAbstract {
 	}
 	
 	public String toString() {
+		return getTupleString();
+	}
+
+	public String getTupleString() {
 		return "["+_connUUID+":"+_connId+"]";
 	}
-	
 	
 	public static byte[] l2b(long l) {
 	    byte[] result = new byte[8];

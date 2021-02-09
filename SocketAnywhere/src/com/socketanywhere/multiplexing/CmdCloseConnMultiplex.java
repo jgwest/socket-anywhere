@@ -66,7 +66,7 @@ public class CmdCloseConnMultiplex extends CmdMultiplexAbstract {
 	
 	@Override
 	public String toString() {
-		return CmdCloseConnMultiplex.class.getSimpleName()+" - nodeUUID:"+getCmdConnUUID()+ "  connectionId:"+getCmdConnectionId();
+		return CmdCloseConnMultiplex.class.getSimpleName()+ " " + super.toString();
 	}
 
 }
